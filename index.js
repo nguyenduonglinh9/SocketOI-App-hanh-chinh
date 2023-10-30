@@ -13,8 +13,11 @@ app.get("/", (req, res, next) => {
 io.on("connection", (socket) => {
   console.log("User Connected !");
 
-  socket.on("on-send-data", (data) => {
-    socket.emit("server-send-data", data);
+  socket.on("createTicket", (data) => {
+    socket.broadcast.emit("server-send-createTicket", data);
+  });
+  socket.on("updateTicket", (data) => {
+    socket.broadcast.emit("server-send-updateTicket", data);
   });
 });
 
